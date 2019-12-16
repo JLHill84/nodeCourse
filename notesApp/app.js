@@ -1,18 +1,11 @@
-const yargs = require("yargs");
 const chalk = require("chalk");
-
-const getNotes = require("./notes");
-
-// expirment with version changing
-yargs.version("1.1.0");
-
-// adding various commands: add, remove, list, read
+const yargs = require("yargs");
 
 yargs.command({
   command: "add",
-  describe: "add a new note",
+  describe: "add a note",
   handler: () => {
-    console.log("add a new note");
+    console.log("adding that note");
   }
 });
 
