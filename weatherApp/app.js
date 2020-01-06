@@ -8,8 +8,8 @@ const mapsURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/Sacramento.js
 
 request({ url: mapsURL, json: true }, (error, response) => {
   console.log(response.body.features[0].geometry.coordinates);
-  cityLat = response.body.features[0].geometry.coordinates[0];
-  cityLng = response.body.features[0].geometry.coordinates[1];
+  cityLat = response.body.features[0].geometry.coordinates[1];
+  cityLng = response.body.features[0].geometry.coordinates[0];
 });
 
 request(
