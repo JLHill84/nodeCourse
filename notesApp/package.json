@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "chalk": "^3.0.0",
+    "fs": "0.0.1-security",
     "yargs": "^15.1.0"
   },
   "devDependencies": {},
