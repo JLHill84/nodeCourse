@@ -1,10 +1,6 @@
 const fs = require("fs");
 const chalk = require("chalk");
 
-const getNotes = () => {
-  return "My notes, friend";
-};
-
 const addNote = (title, body) => {
   const notes = loadNotes();
   const dupeNote = notes.find(note => note.title === title);
@@ -15,6 +11,10 @@ const addNote = (title, body) => {
       body: body
     });
     saveNotes(notes);
+
+    // hot dog that's alotta power
+    debugger;
+
     console.log(chalk.greenBright("added a fresh note"));
   } else {
     console.log(chalk.redBright("note with that title already exists"));
@@ -70,7 +70,6 @@ const readNote = title => {
 };
 
 module.exports = {
-  getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
   listNotes: listNotes,
