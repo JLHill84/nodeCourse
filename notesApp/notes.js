@@ -7,11 +7,9 @@ const getNotes = () => {
 
 const addNote = (title, body) => {
   const notes = loadNotes();
-  const dupeNotes = notes.filter(note => {
-    return note.title === title;
-  });
+  const dupeNote = notes.find(note => note.title === title);
 
-  if (dupeNotes.length === 0) {
+  if (!dupeNote) {
     notes.push({
       title: title,
       body: body
@@ -23,7 +21,7 @@ const addNote = (title, body) => {
   }
 };
 
-const saveNotes = (notes) => {
+const saveNotes = notes => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
 };
@@ -38,7 +36,7 @@ const loadNotes = () => {
   }
 };
 
-const removeNote = (title) => {
+const removeNote = title => {
   const notes = loadNotes();
   const notesArr = notes.filter(note => {
     return note.title !== title;
@@ -51,8 +49,30 @@ const removeNote = (title) => {
   }
 };
 
+const listNotes = () => {
+  const notes = loadNotes();
+  console.log(chalk.greenBright("your saved notes"));
+
+  notes.forEach(note => {
+    console.log(chalk.yellowBright(note.title));
+  });
+};
+
+const readNote = title => {
+  const notes = loadNotes();
+  const note = notes.find(note => note.title === title);
+
+  if (note) {
+    console.log(chalk.yellowBright(note.body));
+  } else {
+    console.log(chalk.redBright("no note with that title"));
+  }
+};
+
 module.exports = {
   getNotes: getNotes,
   addNote: addNote,
-  removeNote: removeNote
+  removeNote: removeNote,
+  listNotes: listNotes,
+  readNote: readNote
 };

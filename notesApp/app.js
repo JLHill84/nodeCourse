@@ -51,16 +51,10 @@ yargs.command({
       describe: "title of note",
       demandOption: true,
       type: "string"
-    },
-    body: {
-      describe: "note body",
-      demandOption: true,
-      type: "string"
     }
   },
   handler(argv) {
-    console.log("note title: " + argv.title);
-    console.log("note body: " + argv.body);
+    notes.readNote(argv.title);
   }
 });
 
@@ -68,7 +62,7 @@ yargs.command({
   command: "list",
   describe: "list all notes",
   handler() {
-    console.log("listing all the notes");
+    notes.listNotes();
   }
 });
 
