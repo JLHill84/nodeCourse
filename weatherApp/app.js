@@ -6,16 +6,16 @@ const searchName = process.argv[2];
 if (!searchName) {
   console.log("provide search term");
 } else {
-  geocode(searchName, (error, data) => {
+  geocode(searchName, (error, { lat, lng, cityName }) => {
     if (error) {
       return console.log(error);
     }
 
-    forecast(data.lat, data.lng, (error, forecastData) => {
+    forecast(lat, lng, (error, forecastData) => {
       if (error) {
         return console.log(error);
       }
-      console.log(data.cityName);
+      console.log(cityName);
       console.log(forecastData);
     });
   });

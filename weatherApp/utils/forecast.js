@@ -4,19 +4,19 @@ const keys = require("./key");
 
 const forecast = (lat, lng, callback) => {
   const url = `https://api.darksky.net/forecast/${keys.weather}/${lat},${lng}`;
-  request({ url: url, json: true }, (error, response) => {
+  request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("unable to connect", undefined);
-    } else if (response.body.error) {
+    } else if (body.error) {
       callback("unable to find that city", undefined);
     } else {
       callback(
         undefined,
-        response.body.daily.data[0].summary +
+        body.daily.data[0].summary +
           " The temp is: " +
-          response.body.currently.temperature +
+          body.currently.temperature +
           " degrees, with a " +
-          response.body.currently.precipProbability +
+          body.currently.precipProbability +
           "% chance of rain."
       );
     }
