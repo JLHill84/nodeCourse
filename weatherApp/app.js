@@ -1,21 +1,27 @@
-const request = require("request");
 const geocode = require("./utils/geocode.js");
 const forecast = require("./utils/forecast");
 
-// const keys = require("./key.js");
+const searchName = process.argv[2];
 
-// geocode("houston", (error, data) => {
-//   console.log("error", error);
-//   console.log("data", data);
-// });
+if (!searchName) {
+  console.log("provide search term");
+} else {
+  geocode(searchName, (error, data) => {
+    if (error) {
+      return console.log(error);
+    }
 
-forecast(-75.7088, 44.1545, (error, data) => {
-  console.log("error: ", error);
-  console.log("data: ", data);
-});
-
+    forecast(data.lat, data.lng, (error, forecastData) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(data.cityName);
+      console.log(forecastData);
+    });
+  });
+}
 //////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 // this was my solo attempt, and it worked fine but i went ahead and got back in synch
 // with the course for continuity's sake
 
