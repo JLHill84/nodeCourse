@@ -43,6 +43,22 @@ app.get("/weather", (req, res) => {
   res.send([{ forecast: "weather page", location: "all the weather" }]);
 });
 
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: '404: Help Section',
+    name: "Joshua Hill",
+    message: "Couldn't find your help docs"
+  });
+});
+
+app.get("*", (req, res) => {
+  res.render('404', {
+    title: '404',
+    name: "Joshua Hill",
+    message: "ERROR...ERROR"
+  })
+});
+
 app.listen(3000, () => {
   console.log("server running on 3k");
 });
