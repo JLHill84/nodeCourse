@@ -40,23 +40,46 @@ app.get("/help", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  res.send([{ forecast: "weather page", location: "all the weather" }]);
+  if (!req.query.address) {
+    return res.send({
+      error: "address required"
+    });
+  }
+  res.send([
+    {
+      forecast: "weather page",
+      location: `Houston`,
+      address: req.query.address
+    }
+  ]);
+});
+
+app.get("/products", (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: "search term needed"
+    });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: []
+  });
 });
 
 app.get("/help/*", (req, res) => {
   res.render("404", {
-    title: '404: Help Section',
+    title: "404: Help Section",
     name: "Joshua Hill",
     message: "Couldn't find your help docs"
   });
 });
 
 app.get("*", (req, res) => {
-  res.render('404', {
-    title: '404',
+  res.render("404", {
+    title: "404",
     name: "Joshua Hill",
     message: "ERROR...ERROR"
-  })
+  });
 });
 
 app.listen(3000, () => {
